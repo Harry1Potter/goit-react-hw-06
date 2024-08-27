@@ -2,6 +2,8 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/contactsSlice';
 
 const initialValues = {
   username: "",
@@ -21,7 +23,9 @@ const validationSchema = Yup.object({
     .required("Number is required")
 });
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
     const contactObject = {
       id: Date.now().toString(),
@@ -29,7 +33,7 @@ const ContactForm = ({ onAddContact }) => {
       number: values.userenumber
     };
 
-    onAddContact(contactObject);
+    dispatch(addContact(contactObject));
     actions.resetForm();
   };
 
@@ -43,12 +47,12 @@ const ContactForm = ({ onAddContact }) => {
         <label>
           <span>Name</span>
           <Field type="text" name="username" />
-          <ErrorMessage name="username" component="div" className="error" /> {}
+          <ErrorMessage name="username" component="div" className="error" />
         </label>
         <label>
           <span>Number</span>
           <Field type="text" name="userenumber" />
-          <ErrorMessage name="userenumber" component="div" className="error" /> {}
+          <ErrorMessage name="userenumber" component="div" className="error" />
         </label>
         <button type="submit">Add contact</button>
       </Form>

@@ -1,12 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-const INITIAL_STATE = {
-  items: [],
-};
+import { createSlice } from '@reduxjs/toolkit';
 
 const contactsSlice = createSlice({
-  name: "contacts",
-  initialState: INITIAL_STATE,
+  name: 'contacts',
+  initialState: {
+    items: [],
+  },
   reducers: {
     addContact(state, action) {
       state.items.push(action.payload);
@@ -18,4 +16,7 @@ const contactsSlice = createSlice({
 });
 
 export const { addContact, deleteContact } = contactsSlice.actions;
+
+export const selectContacts = (state) => state.contacts.items;
+
 export const contactsReducer = contactsSlice.reducer;
