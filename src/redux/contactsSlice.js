@@ -15,11 +15,8 @@ const contactsSlice = createSlice({
   },
 });
 
-// Export actions
 export const { addContact, deleteContact } = contactsSlice.actions;
 
-// Selector to get contacts from state
 export const selectContacts = (state) => state.contacts.items;
 
-// Export the reducer to be added to the store
 export const contactsReducer = contactsSlice.reducer;
