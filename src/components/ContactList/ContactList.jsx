@@ -1,11 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
-import { selectContacts } from '../../redux/contactsSlice';
+import { selectContacts, deleteContact } from '../../redux/contactsSlice';
 import { selectFilter } from '../../redux/filtersSlice';
 
 const ContactList = () => {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filterValue = useSelector(selectFilter);
 
@@ -19,6 +20,7 @@ const ContactList = () => {
         <Contact
           key={contact.id}
           contact={contact}
+          deleteContact={() => dispatch(deleteContact(contact.id))}
         />
       ))}
     </ul>
